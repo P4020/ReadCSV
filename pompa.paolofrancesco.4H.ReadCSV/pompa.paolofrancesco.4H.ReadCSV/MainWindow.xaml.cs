@@ -39,9 +39,9 @@ namespace pompa.paolofrancesco._4H.ReadCSV
                     string str = fin.ReadLine();
                     if(i != 0)
                     {
-                        string[] colonne = str.Split(";");
-                        Utente u =  new Utente { Nome = colonne[0], Cognome = colonne[1], Email = colonne[2] };
-                        valori.Add(u);
+                        /*string[] colonne = str.Split(";");
+                        Utente u = new Utente { Nome = colonne[0], Cognome = colonne[1], Email = colonne[2] };*/
+                        valori.Add(new Utente(str));
                     }
                     i++;
                 }
@@ -62,8 +62,20 @@ namespace pompa.paolofrancesco._4H.ReadCSV
                 {
                     Utente u = e.Row.Item as Utente;
                     if (u != null)
-                        MessageBox.Show(u.Nome);
+                    {
+                        if(u.Tipo == "Studente")
+                        {
+                            e.Row.Background = Brushes.Black;
+                            e.Row.Foreground = Brushes.Orange;
+                        }
+                        if(u.Tipo == "Docente")
+                        {
+                            e.Row.Background = Brushes.Aquamarine;
+                        }
+                    }
                 }
+                    
+                        
             }
             catch
             {
