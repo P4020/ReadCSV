@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,10 @@ namespace pompa.paolofrancesco._4H.ReadCSV.Models
         public string Email { get; set; }
 
         public string Tipo { get; set; }
+        
+        public Utente()
+        { 
+        }
 
         public Utente(string str)
         {
@@ -25,6 +30,31 @@ namespace pompa.paolofrancesco._4H.ReadCSV.Models
             Tipo = colonne[3];
             
         }
+    }
+
+    public class Utenti : List<Utente>
+    {
+        public Utenti()
+            : base()
+        {
+        }
+
+        public Utenti (string filename)
+        {
+            StreamReader fin = new StreamReader(filename);
+            fin.ReadLine();
+            while(!fin.EndOfStream)
+            {
+                string str = fin.ReadLine();
+                Add(new Utente(str));
+            }
+        }
+
+        public Utenti(string filename, string tipo)
+            : this(filename)
+        {
+        }
+        
     }
    
 
